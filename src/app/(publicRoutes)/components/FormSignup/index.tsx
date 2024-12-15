@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 import { Eye, EyeOff, Mail } from 'lucide-react'
 
-import { FormSchemaSign, FormSchemaSignProps } from './schema'
+import { FormSchemaSignup, FormSchemaSignupProps } from './schema'
 
 import { Label } from '../Label'
 import { ErrorMessage } from '../ErrorMessage'
@@ -18,22 +18,27 @@ import { Button } from '@/components/ui/button'
 
 import { colors } from '@/styles/colors'
 
-export const FormSign = () => {
+export const FormSignup = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
+  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false)
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormSchemaSignProps>({
-    resolver: zodResolver(FormSchemaSign),
+  } = useForm<FormSchemaSignupProps>({
+    resolver: zodResolver(FormSchemaSignup),
   })
 
-  const handleForm = (dataForm: FormSchemaSignProps) => {
+  const handleForm = (dataForm: FormSchemaSignupProps) => {
     console.log(dataForm)
   }
 
   const handleShowPassword = () => {
     setIsShowPassword(!isShowPassword)
+  }
+
+  const handleShowConfirmPassword = () => {
+    setIsShowConfirmPassword(!isShowPassword)
   }
 
   return (
@@ -67,6 +72,25 @@ export const FormSign = () => {
         <ErrorMessage errorMessage={errors.password.message} />
       )}
 
+      <Label label="Confirmar senha" className="mt-4 block" />
+      <Input
+        {...register('confirmPassword')}
+        placeholder="Confirme sua senha"
+        className="my-1"
+        type={`${isShowConfirmPassword ? 'text' : 'password'}`}
+        icon={
+          isShowConfirmPassword ? (
+            <EyeOff size={20} color={colors['gray-light']} />
+          ) : (
+            <Eye size={20} color={colors['gray-light']} />
+          )
+        }
+        handleClickIcon={handleShowConfirmPassword}
+      />
+      {errors.confirmPassword?.message && (
+        <ErrorMessage errorMessage={errors.confirmPassword.message} />
+      )}
+
       <div className="flex justify-end">
         <Link
           href="/sign"
@@ -76,15 +100,13 @@ export const FormSign = () => {
         </Link>
       </div>
       <Button type="submit" className="w-full">
-        entrar
+        criar conta
       </Button>
 
       <div className="mt-4 text-center">
-        <span className="text-sm text-gray-light">
-          Ainda não possui uma conta?{' '}
-        </span>
-        <Link href="/signup" className="text-blue-dark text-sm font-bold">
-          Inscreva-se
+        <span className="text-sm text-gray-light">Já possui uma conta? </span>
+        <Link href="/sign" className="text-blue-dark text-sm font-bold">
+          Entrar
         </Link>
       </div>
     </form>
