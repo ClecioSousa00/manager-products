@@ -1,7 +1,5 @@
-import Link from 'next/link'
 import { FormSign } from '../components/FormSign'
 import { InfosTitleContent } from '../components/InfosTitleContent'
-import { Button } from '@/components/ui/button'
 
 export default function Page() {
   return (
