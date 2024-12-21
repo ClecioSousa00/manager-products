@@ -4,9 +4,9 @@ import { Logo } from '@/iconsSvg/Logo'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="flex items-center justify-center min-h-screen w-screen flex-col">
-      <div className="flex items-center gap-12  w-full  flex-1 p-7 md:pr-24">
-        <div className="hidden md:bg-blue-light md:rounded-2xl  md:flex md:items-center md:justify-center md:h-[600px] md:w-[600px]">
+    <main className="flex items-center  justify-center min-h-screen w-screen flex-col">
+      <div className="flex items-center gap-12  w-full justify-center flex-1 p-7 md:pr-24">
+        <div className="hidden md:bg-blue-light md:rounded-2xl  md:flex md:items-center md:justify-center  md:max-h-[600px] md:max-w-[600px]">
           <Image
             src={'/imagen-Inventory.webp'}
             width={434}
