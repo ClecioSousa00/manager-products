@@ -18,6 +18,7 @@ const config: Config = {
         'blue-light': '#F2F8FC',
         'blue-primary': '#C2D8E9',
         'blue-dark': '#006EC4',
+        'blue-link': '#B9D2E8',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

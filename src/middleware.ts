@@ -28,7 +28,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const userAuthenticate = false
+  const userAuthenticate = true
 
   const pathNameSign = new URL('/sign', request.url)
   const pathNameDashboard = new URL('/inventory/dashboard', request.url)

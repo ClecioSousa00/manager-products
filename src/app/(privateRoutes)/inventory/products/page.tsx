@@ -1,3 +1,3 @@
 export default function Page() {
-  return <h1>Profuvdd</h1>
+  return <h1>Produtos</h1>
 }
