@@ -1,16 +1,14 @@
 'use client'
-import { Input } from '@/components/ui/input'
+import React from 'react'
+
 import { colors } from '@/styles/colors'
+
 import { Search, Bell, ChevronDown, User2, Info, LogOut } from 'lucide-react'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+
+import * as Dropdown from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Input } from '@/components/ui/input'
+
 import { ItemDropdown } from '../ItemDropdown'
 
 const itemsDropdown = [
@@ -41,9 +39,9 @@ export const Header = () => {
         <button className="rounded-lg bg-gray-light/30 w-8 h-8 flex items-center justify-center">
           <Bell width={18} color={colors['gray-dark']} />
         </button>
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <div className=" md:flex md:items-center md:justify-between md:max-w-44 md:w-full md:rounded-lg md:border-input md:border p-1">
+        <Dropdown.DropdownMenu>
+          <Dropdown.DropdownMenuTrigger>
+            <div className="md:flex md:items-center md:justify-between md:max-w-44 md:w-full md:rounded-lg md:border-input md:border p-1">
               <div className="md:flex md:items-center md:gap-1">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="https://github.com/shadcn.png" />
@@ -64,30 +62,39 @@ export const Header = () => {
                 color={colors['gray-dark']}
               />
             </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
+          </Dropdown.DropdownMenuTrigger>
+          <Dropdown.DropdownMenuContent>
+            <Dropdown.DropdownMenuLabel>Minha Conta</Dropdown.DropdownMenuLabel>
+            <Dropdown.DropdownMenuSeparator />
+            {itemsDropdown.map((item, index) => {
+              const isLastItem = itemsDropdown.length - 1 === index
+              return (
+                <React.Fragment key={item.label}>
+                  {isLastItem && <Dropdown.DropdownMenuSeparator />}
+                  <Dropdown.DropdownMenuItem>
+                    <ItemDropdown icon={item.icon} label={item.label} />
+                  </Dropdown.DropdownMenuItem>
+                </React.Fragment>
+              )
+            })}
+            {/* <DropdownMenuItem>
+              <div className="flex items-center justify-between w-full">
+                <p>Perfil</p> <User2 width={18} color={colors['gray-dark']} />
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <div className="flex items-center justify-between w-full">
+                <p>Perfil</p> <User2 width={18} color={colors['gray-dark']} />
+              </div>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {itemsDropdown.map((item, index) => {
-                const isLastItem = itemsDropdown.length - 1 === index
-                return (
-                  <>
-                    {isLastItem && <DropdownMenuSeparator />}
-                    <DropdownMenuItem
-                      key={item.label}
-                      className="cursor-pointer"
-                    >
-                      <ItemDropdown icon={item.icon} label={item.label} />
-                    </DropdownMenuItem>
-                  </>
-                )
-              })}
-            </DropdownMenuContent>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            <DropdownMenuItem>
+              <div className="flex items-center justify-between w-full">
+                <p>Perfil</p> <User2 width={18} color={colors['gray-dark']} />
+              </div>
+            </DropdownMenuItem> */}
+          </Dropdown.DropdownMenuContent>
+        </Dropdown.DropdownMenu>
       </div>
     </header>
   )
