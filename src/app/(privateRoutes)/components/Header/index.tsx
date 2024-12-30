@@ -1,15 +1,14 @@
-'use client'
 import React from 'react'
 
 import { colors } from '@/styles/colors'
 
-import { Search, Bell, ChevronDown, User2, Info, LogOut } from 'lucide-react'
+import { Bell, ChevronDown, User2, Info, LogOut } from 'lucide-react'
 
 import * as Dropdown from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Input } from '@/components/ui/input'
 
 import { ItemDropdown } from '../ItemDropdown'
+import { InputSearch } from '../InputSearch'
 
 const itemsDropdown = [
   {
@@ -29,12 +28,7 @@ const itemsDropdown = [
 export const Header = () => {
   return (
     <header className="flex justify-between items-center w-full gap-2">
-      <Input
-        className="h-8 text-sm"
-        placeholder="Buscar Produto"
-        icon={<Search width={18} color={colors['gray-dark']} />}
-        handleClickIcon={() => console.log('search')}
-      />
+      <InputSearch />
       <div className="flex items-center gap-1">
         <button className="rounded-lg bg-gray-light/30 w-8 h-8 flex items-center justify-center">
           <Bell width={18} color={colors['gray-dark']} />
@@ -43,7 +37,7 @@ export const Header = () => {
           <Dropdown.DropdownMenuTrigger>
             <div className="md:flex md:items-center md:justify-between md:max-w-44 md:w-full md:rounded-lg md:border-input md:border p-1">
               <div className="md:flex md:items-center md:gap-1">
-                <Avatar className="h-8 w-8">
+                <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
