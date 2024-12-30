@@ -19,20 +19,19 @@ export const NavBarMenu = () => {
 
   return (
     <>
-      <button onClick={handleShowMenu} className="md:hidden">
+      <button onClick={handleShowMenu} className="pt-2  md:hidden">
         <Menu color={colors['gray-dark']} />
-        {/* <Menu /> */}
       </button>
+
       <div
         className={cn(
-          'bg-blue-primary -left-44 pt-2 px-4 w-0 top-0 bottom-0 overflow-hidden absolute transition-all  rounded-r-lg md:rounded-lg md:static   md:w-56 md:h-full',
+          'bg-blue-primary z-10 -left-44 pt-4 px-4 w-0 top-0 bottom-0 overflow-hidden absolute transition-all  rounded-r-lg md:rounded-lg md:static   md:w-60 md:h-full',
           isShowMenu ? 'w-2/3 left-0 ' : '',
         )}
       >
         <div className="flex justify-end md:hidden">
           <button onClick={handleShowMenu}>
             <X color={colors['gray-dark']} />
-            {/* <Menu /> */}
           </button>
         </div>
         <div>
