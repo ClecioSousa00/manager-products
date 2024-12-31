@@ -3,10 +3,10 @@ import { NavBarMenu } from './components/NavBarMenu'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="p-3  h-screen  2xl:container mx-auto">
-      <div className="flex gap-2 w-ful md:h-full items-start">
+    <div className="p-3 pr-0 h-screen   2xl:container mx-auto">
+      <div className="flex gap-2 w-ful md:h-full   items-start">
         <NavBarMenu />
-        <div className="w-full">
+        <div className="w-full h-full md:overflow-auto pr-2">
           <Header />
           <main className="hidden md:block">{children}</main>
         </div>

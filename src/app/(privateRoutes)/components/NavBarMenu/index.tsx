@@ -1,12 +1,13 @@
 'use client'
 import { Logo } from '@/iconsSvg/Logo'
-import { Menu, X } from 'lucide-react'
+import { LogOut, Menu, X } from 'lucide-react'
 import { LinkNavBarMenu } from '../LinkNavBarMenu'
 import { usePathname } from 'next/navigation'
 import { links } from '../../links/links'
 import { colors } from '@/styles/colors'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 export const NavBarMenu = () => {
   const pathname = usePathname()
@@ -25,7 +26,7 @@ export const NavBarMenu = () => {
 
       <div
         className={cn(
-          'bg-blue-primary z-10 -left-44 pt-4 px-4 w-0 top-0 bottom-0 overflow-hidden absolute transition-all  rounded-r-lg md:rounded-lg md:static   md:w-60 md:h-full',
+          'bg-blue-primary z-10 -left-44 pt-4 px-4 w-0 top-0 bottom-0 overflow-hidden absolute transition-all  rounded-r-lg md:rounded-lg md:static   md:w-64 md:h-full',
           isShowMenu ? 'w-2/3 left-0 ' : '',
         )}
       >
@@ -58,6 +59,12 @@ export const NavBarMenu = () => {
             )
           })}
         </nav>
+        <div className="hidden md:h-4/6 md:flex  md:items-end  md:w-full">
+          <Button className="w-full">
+            Sair
+            <LogOut />
+          </Button>
+        </div>
       </div>
     </>
   )

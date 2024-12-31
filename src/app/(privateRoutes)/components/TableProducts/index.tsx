@@ -1,97 +1,45 @@
-import Image from 'next/image'
-import { cn } from '@/lib/utils'
+'use client'
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
+import { Search } from 'lucide-react'
 
-import ImageProduct from './img-monitor.png'
+import { colors } from '@/styles/colors'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
-const itemsProductsTable = [
-  {
-    name: 'monitor',
-    image: ImageProduct,
-    price: '1.099,99',
-    quantity: 1,
-  },
-  {
-    name: 'monitor 2',
-    image: ImageProduct,
-    price: '1.099,99',
-    quantity: 2,
-  },
-  {
-    name: 'monitor 3',
-    image: ImageProduct,
-    price: '1.099,99',
-    quantity: 3,
-  },
-  {
-    name: 'monitor 4',
-    image: ImageProduct,
-    price: '1.099,99',
-    quantity: 4,
-  },
-]
+import { IconPlus } from '@/iconsSvg/IconPlus'
+import { IconFilter } from '@/iconsSvg/IconFilter'
 
-const itemsTableHeader = [
-  {
-    title: 'Nome',
-  },
-  {
-    title: 'Imagem',
-  },
-  {
-    title: 'Preço',
-  },
-  {
-    title: 'Qts.',
-  },
-]
+import { ContainerTable } from '../Table/ContainerTable'
+import { TableContent } from '../Table/TableContent'
+import { Separator } from '@/components/ui/separator'
 
 export const TableProducts = () => {
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          {itemsTableHeader.map((item, index) => (
-            <TableHead
-              key={item.title}
-              className={cn(
-                'bg-input text-gray-dark text-xs md:h-14',
-                index === itemsProductsTable.length - 1
-                  ? ' w-4 text-right '
-                  : '',
-              )}
-            >
-              {item.title}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {itemsProductsTable.map((product, indexProduct) => (
-          <TableRow key={indexProduct} className="text-xs capitalize">
-            <TableCell>{product.name}</TableCell>
-            <TableCell className="p-1 ">
-              <div className="w-16 h-16 aspect-square">
-                <Image
-                  className="w-full h-full object-cover"
-                  src={product.image}
-                  alt={product.name}
-                />
-              </div>
-            </TableCell>
-            <TableCell>{`R$ ${product.price}`}</TableCell>
-            <TableCell className="text-center">{product.quantity}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <ContainerTable>
+      <div className="flex items-center justify-between gap-2">
+        <Input
+          className="h-10 w-full max-w-80 text-sm"
+          placeholder="Buscar Produto"
+          icon={<Search width={18} color={colors['gray-dark']} />}
+          handleClickIcon={() => console.log('search')}
+        />
+        <div className="space-x-2 flex items-center">
+          <Button>
+            <IconPlus />
+            <span className="hidden md:block" title="Adicionar Produto">
+              Adicionar Produto
+            </span>
+          </Button>
+          <Button variant={'outline'}>
+            <IconFilter />
+            <span className="hidden md:block" title="Filtro">
+              Filtro
+            </span>
+          </Button>
+        </div>
+      </div>
+      <Separator className="my-4" />
+      <TableContent hasEditTable />
+    </ContainerTable>
   )
 }

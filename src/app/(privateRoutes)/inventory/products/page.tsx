@@ -1,3 +1,9 @@
+import { TableProducts } from '../../components/TableProducts'
+
 export default function Page() {
-  return <h1>Produtos</h1>
+  return (
+    <section className="mt-10">
+      <TableProducts />
+    </section>
+  )
 }
