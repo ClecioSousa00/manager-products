@@ -15,7 +15,7 @@ export const LinkNavBarMenu = ({
   return (
     <Link
       className={cn(
-        'flex gap-2 items-center pl-3 py-2 rounded-r-lg transition-all duration-150',
+        'flex gap-2 items-center pl-3 py-2 rounded-r-lg transition-all duration-150 text-gray-dark',
         active
           ? 'bg-blue-link border-l-2 border-l-blue-dark text-blue-dark font-bold '
           : 'hover:bg-blue-link/65 hover:border-l-2 hover:border-l-blue-dark/65 hover:text-blue-dark/65 hover:-translate-y-1',
