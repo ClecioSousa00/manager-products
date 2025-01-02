@@ -1,14 +1,15 @@
+'use client'
 import React from 'react'
 
 import { colors } from '@/styles/colors'
 
-import { Bell, ChevronDown, User2, Info, LogOut } from 'lucide-react'
+import { Bell, ChevronDown, User2, Info, LogOut, Search } from 'lucide-react'
 
 import * as Dropdown from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 import { ItemDropdown } from '../ItemDropdown'
-import { InputSearch } from '../InputSearch'
 
 const itemsDropdown = [
   {
@@ -28,7 +29,12 @@ const itemsDropdown = [
 export const Header = () => {
   return (
     <header className="flex justify-between items-center w-full gap-2">
-      <InputSearch />
+      <Input
+        className="h-8 text-sm"
+        placeholder="Buscar Produto"
+        icon={<Search width={18} color={colors['gray-dark']} />}
+        handleClickIcon={() => console.log('search')}
+      />
       <div className="flex items-center gap-1">
         <button className="rounded-lg bg-gray-light/30 w-8 h-8 flex items-center justify-center">
           <Bell width={18} color={colors['gray-dark']} />
