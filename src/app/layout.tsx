@@ -1,6 +1,7 @@
 import './globals.css'
 import { manrope } from '../Fonts/fonts'
 import type { Metadata } from 'next'
+import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
   title: 'Inventory',
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={`${manrope.variable} antialiased font-sans`}>
         {children}
+        <Toaster />
       </body>
     </html>
   )

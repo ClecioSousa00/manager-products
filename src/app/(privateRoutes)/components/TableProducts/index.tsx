@@ -3,15 +3,16 @@
 import { Search } from 'lucide-react'
 
 import { colors } from '@/styles/colors'
+
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Separator } from '@/components/ui/separator'
 
 import { IconPlus } from '@/iconsSvg/IconPlus'
-import { IconFilter } from '@/iconsSvg/IconFilter'
 
 import { ContainerTable } from '../Table/ContainerTable'
 import { TableContent } from '../Table/TableContent'
-import { Separator } from '@/components/ui/separator'
+import { FormFilter } from '../FormFilter'
 
 export const TableProducts = () => {
   return (
@@ -30,12 +31,7 @@ export const TableProducts = () => {
               Adicionar Produto
             </span>
           </Button>
-          <Button variant={'outline'}>
-            <IconFilter />
-            <span className="hidden md:block" title="Filtro">
-              Filtro
-            </span>
-          </Button>
+          <FormFilter />
         </div>
       </div>
       <Separator className="my-4" />
