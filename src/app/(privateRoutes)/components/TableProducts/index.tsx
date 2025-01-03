@@ -11,6 +11,8 @@ import { ContainerTable } from '../Table/ContainerTable'
 import { TableContent } from '../Table/TableContent'
 import { FormFilter } from '../FormFilter'
 import { FormAddProduct } from '../FormAddProduct'
+import { Button } from '@/components/ui/button'
+import { IconPlus } from '@/iconsSvg/IconPlus'
 
 export const TableProducts = () => {
   return (
@@ -23,7 +25,14 @@ export const TableProducts = () => {
           handleClickIcon={() => console.log('search')}
         />
         <div className="space-x-2 flex items-center">
-          <FormAddProduct />
+          <FormAddProduct>
+            <Button>
+              <IconPlus />
+              <span className="hidden md:block" title="Adicionar Produto">
+                Adicionar Produto
+              </span>
+            </Button>
+          </FormAddProduct>
           <FormFilter />
         </div>
       </div>
