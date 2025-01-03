@@ -1,7 +1,10 @@
 import './globals.css'
-import { manrope } from '../Fonts/fonts'
-import type { Metadata } from 'next'
+
 import { Toaster } from '@/components/ui/toaster'
+
+import { manrope } from '../Fonts/fonts'
+
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Inventory',

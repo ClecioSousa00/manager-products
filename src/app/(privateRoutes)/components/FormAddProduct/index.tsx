@@ -1,26 +1,24 @@
-import * as SheetUi from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
+import { ReactNode } from 'react'
 
-import { IconPlus } from '@/iconsSvg/IconPlus'
-import { Label } from '@/components/ui/label'
+import * as SheetUi from '@/components/ui/sheet'
 import * as SelectUi from '@/components/ui/select'
-import { optionsCategory } from '../TableProducts/optionsCategory'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 
-export const FormAddProduct = () => {
+import { optionsCategory } from '../TableProducts/optionsCategory'
+
+type Props = {
+  children: ReactNode
+}
+
+export const FormAddProduct = ({ children }: Props) => {
   const handleSelectCategory = (category: string) => {
     console.log(category)
   }
   return (
     <SheetUi.Sheet>
-      <SheetUi.SheetTrigger asChild>
-        <Button>
-          <IconPlus />
-          <span className="hidden md:block" title="Adicionar Produto">
-            Adicionar Produto
-          </span>
-        </Button>
-      </SheetUi.SheetTrigger>
+      <SheetUi.SheetTrigger asChild>{children}</SheetUi.SheetTrigger>
       <SheetUi.SheetContent className="w-[90%] md:max-w-[420px] h-full px-0">
         <SheetUi.SheetHeader>
           <SheetUi.SheetTitle className="text-left pl-5">
