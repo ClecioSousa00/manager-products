@@ -4,13 +4,13 @@ import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
 
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import * as TableUi from '@/components/ui/table'
 import * as PaginationUi from '@/components/ui/pagination'
 import * as DialogUi from '@/components/ui/dialog'
@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/button'
 
 import { ButtonTable } from '../../ButtonTable'
 
-import { itemsProductsTable } from './productsTable'
+import { ProductTable } from './productsTable'
 // import { useState } from 'react'
 
 import { ChevronsUpDown } from 'lucide-react'
@@ -31,15 +31,19 @@ import { FormAddProduct } from '../../FormAddProduct'
 
 type Props = {
   hasEditTable?: boolean
+  itemsProductsTable: ProductTable[]
 }
 
-export const TableContent = ({ hasEditTable = false }: Props) => {
+export const TableContent = ({
+  hasEditTable = false,
+  itemsProductsTable,
+}: Props) => {
   const { toast } = useToast()
   // const [quantityProductsPerPage, setQuantityProductsPerPage] = useState(10)
 
-  // const handleSelectShowProducts = (option: string) => {
-  //   setQuantityProductsPerPage(parseInt(option))
-  // }
+  const handleSelectShowProducts = (quantityShowProducts: string) => {
+    console.log(quantityShowProducts)
+  }
 
   const handleDeleteProduct = () => {
     const hasExcludesProduct = false
@@ -89,6 +93,11 @@ export const TableContent = ({ hasEditTable = false }: Props) => {
             <TableUi.TableHead className="bg-input text-gray-dark  text-xs md:h-14 w-[250px] ">
               Categoria
             </TableUi.TableHead>
+            {hasEditTable && (
+              <TableUi.TableHead className="bg-input text-gray-dark  text-xs md:h-14 w-[250px] ">
+                Data
+              </TableUi.TableHead>
+            )}
 
             <TableUi.TableHead className="  bg-input text-gray-dark  text-xs md:h-14 w-[250px] ">
               <div className="flex gap-1">
@@ -131,7 +140,11 @@ export const TableContent = ({ hasEditTable = false }: Props) => {
                 </div>
               </TableUi.TableCell>
               <TableUi.TableCell>{product.category}</TableUi.TableCell>
+              {hasEditTable && (
+                <TableUi.TableCell>{product.date}</TableUi.TableCell>
+              )}
               <TableUi.TableCell>{`R$ ${product.price}`}</TableUi.TableCell>
+
               <TableUi.TableCell
                 className={cn(hasEditTable ? 'text-left' : 'text-center ')}
               >
@@ -197,19 +210,19 @@ export const TableContent = ({ hasEditTable = false }: Props) => {
         <>
           <Separator />
           <div className="flex flex-wrap items-center justify-between w-full  mt-3">
-            {/* <div className="flex items-center  gap-2">
-            <p className="text-sm text-gray-light font-light">Mostrando</p>
-            <Select onValueChange={handleSelectShowProducts}>
-              <SelectTrigger className="w-16 h-11">
-                <SelectValue placeholder="10" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="15">15</SelectItem>
-                <SelectItem value="20">20</SelectItem>
-              </SelectContent>
-            </Select>
-          </div> */}
+            <div className="flex items-center  gap-2">
+              <p className="text-sm text-gray-light font-light">Mostrando</p>
+              <Select onValueChange={handleSelectShowProducts}>
+                <SelectTrigger className="w-16 h-11">
+                  <SelectValue placeholder="10" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="10">10</SelectItem>
+                  <SelectItem value="15">15</SelectItem>
+                  <SelectItem value="20">20</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <p className="text-sm text-gray-light text-center font-light">
               Mostrando 20 de 50 Produtos
             </p>

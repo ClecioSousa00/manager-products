@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode } from 'react'
 
 import * as SheetUi from '@/components/ui/sheet'
@@ -7,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 
 import { optionsCategory } from '../TableProducts/optionsCategory'
+import { ContainerInputLabel } from '@/app/components/ContainerInputLabel'
 
 type Props = {
   children: ReactNode
@@ -28,15 +30,12 @@ export const FormAddProduct = ({ children }: Props) => {
         <div className="h-full flex flex-col justify-between pt-4">
           <form action="" className=" px-5 flex flex-col  gap-4 ">
             <div className="flex flex-col gap-2 ">
-              <Label
-                htmlFor="category"
-                className="text-xs text-left text-gray-light"
-              >
+              <Label htmlFor="category">
                 Categoria
                 <span className="text-danger"> *</span>
               </Label>
               <SelectUi.Select onValueChange={handleSelectCategory}>
-                <SelectUi.SelectTrigger className="w-full  text-gray-light">
+                <SelectUi.SelectTrigger className="w-full ">
                   <SelectUi.SelectValue placeholder="Selecione uma categoria"></SelectUi.SelectValue>
                 </SelectUi.SelectTrigger>
                 <SelectUi.SelectContent>
@@ -48,60 +47,47 @@ export const FormAddProduct = ({ children }: Props) => {
                 </SelectUi.SelectContent>
               </SelectUi.Select>
             </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="nameProduct"
-                className="text-xs text-left text-gray-light"
-              >
-                Nome
-                <span className="text-danger"> *</span>
-              </Label>
-              <Input
-                id="nameProduct"
-                placeholder="Informe o nome do produto"
-                className="text-sm text-gray-light placeholder:text-gray-light font-normal"
-              />
+
+            <div className="flex gap-2">
+              <ContainerInputLabel className="w-full">
+                <Label htmlFor="nameProduct">
+                  Nome do Produto
+                  <span className="text-danger"> *</span>
+                </Label>
+                <Input id="nameProduct" placeholder="Nome" />
+              </ContainerInputLabel>
+              <ContainerInputLabel className="w-full">
+                <Label htmlFor="date">
+                  Data
+                  <span className="text-danger"> *</span>
+                </Label>
+                <Input id="date" type={'date'} />
+              </ContainerInputLabel>
             </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="picture"
-                className="text-xs text-left text-gray-light"
-              >
-                Imagem
-              </Label>
+            <ContainerInputLabel>
+              <Label htmlFor="picture">Imagem</Label>
               <Input
                 id="picture"
                 type="file"
-                className="file:text-gray-light pl-1 py-0 pt-[5px] -mt-[3px]  px-0 text-gray-light text-xs font-normal file:text-sm  file:font-normal"
+                className=" pl-1 py-0 pt-[5px] -mt-[3px]  px-0 "
               />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="amount"
-                className="text-xs text-left text-gray-light"
-              >
-                Quantidade
-                <span className="text-danger"> *</span>
-              </Label>
-              <Input
-                id="amount"
-                placeholder="Informe a quantidade"
-                className="text-sm text-gray-light placeholder:text-gray-light font-normal"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="price"
-                className="text-xs text-left text-gray-light"
-              >
-                Preço
-                <span className="text-danger"> *</span>
-              </Label>
-              <Input
-                id="price"
-                placeholder="Informe o preço do produto"
-                className="text-sm text-gray-light placeholder:text-gray-light font-normal"
-              />
+            </ContainerInputLabel>
+
+            <div className="flex gap-2">
+              <ContainerInputLabel>
+                <Label htmlFor="amount">
+                  Quantidade
+                  <span className="text-danger"> *</span>
+                </Label>
+                <Input id="amount" type="number" min={0} placeholder="0" />
+              </ContainerInputLabel>
+              <ContainerInputLabel>
+                <Label htmlFor="price">
+                  Preço
+                  <span className="text-danger"> *</span>
+                </Label>
+                <Input id="price" placeholder="0,00" />
+              </ContainerInputLabel>
             </div>
           </form>
           <div className="flex  items-center justify-center shadow-2xl shadow-black/55 gap-2 py-6">

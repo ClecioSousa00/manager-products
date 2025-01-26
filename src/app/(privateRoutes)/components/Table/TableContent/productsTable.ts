@@ -1,4 +1,15 @@
+import { StaticImageData } from 'next/image'
 import ImageProduct from './img-monitor.png'
+
+export type ProductTable = {
+  id: number
+  name: string
+  image: StaticImageData
+  category: string
+  price: string
+  date: string
+  quantity: number
+}
 
 export const itemsTableHeader = [
   {
@@ -18,13 +29,14 @@ export const itemsTableHeader = [
   },
 ]
 
-export const itemsProductsTable = [
+export const itemsProductsTable: ProductTable[] = [
   {
     id: 1,
     name: 'monitor',
     image: ImageProduct,
     category: 'Eletrônico',
     price: '1.099,99',
+    date: '01/01/2025',
     quantity: 1,
   },
   {
@@ -33,6 +45,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Eletrônico',
     price: '1.099,99',
+    date: '01/01/2025',
     quantity: 2,
   },
   {
@@ -41,6 +54,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Eletrônico',
     price: '1.099,99',
+    date: '01/01/2025',
     quantity: 3,
   },
   {
@@ -49,6 +63,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Eletrônico',
     price: '1.099,99',
+    date: '01/01/2025',
     quantity: 4,
   },
   {
@@ -57,6 +72,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Acessório',
     price: '199,99',
+    date: '01/01/2025',
     quantity: 10,
   },
   {
@@ -65,6 +81,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Acessório',
     price: '99,99',
+    date: '01/01/2025',
     quantity: 15,
   },
   {
@@ -73,6 +90,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Eletrônico',
     price: '799,99',
+    date: '01/01/2025',
     quantity: 5,
   },
   {
@@ -81,6 +99,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Eletrônico',
     price: '2.499,99',
+    date: '01/01/2025',
     quantity: 3,
   },
   {
@@ -89,6 +108,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Eletrônico',
     price: '4.599,99',
+    date: '01/01/2025',
     quantity: 8,
   },
   {
@@ -97,6 +117,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Acessório',
     price: '399,99',
+    date: '01/01/2025',
     quantity: 12,
   },
   {
@@ -105,6 +126,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Eletrônico',
     price: '3.299,99',
+    date: '01/01/2025',
     quantity: 6,
   },
   {
@@ -113,6 +135,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Acessório',
     price: '249,99',
+    date: '01/01/2025',
     quantity: 20,
   },
   {
@@ -121,6 +144,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Acessório',
     price: '149,99',
+    date: '01/01/2025',
     quantity: 11,
   },
   {
@@ -129,6 +153,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Eletrônico',
     price: '329,99',
+    date: '01/01/2025',
     quantity: 7,
   },
   {
@@ -137,6 +162,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Acessório',
     price: '199,99',
+    date: '01/01/2025',
     quantity: 14,
   },
   {
@@ -145,6 +171,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Acessório',
     price: '49,99',
+    date: '01/01/2025',
     quantity: 30,
   },
   {
@@ -153,6 +180,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Mobiliário',
     price: '1.499,99',
+    date: '01/01/2025',
     quantity: 4,
   },
   {
@@ -161,6 +189,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Eletrônico',
     price: '2.199,99',
+    date: '01/01/2025',
     quantity: 2,
   },
   {
@@ -169,6 +198,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Acessório',
     price: '79,99',
+    date: '01/01/2025',
     quantity: 25,
   },
   {
@@ -177,6 +207,7 @@ export const itemsProductsTable = [
     image: ImageProduct,
     category: 'Armazenamento',
     price: '599,99',
+    date: '01/01/2025',
     quantity: 9,
   },
 ]
