@@ -24,31 +24,64 @@
 // export const config = {
 //   matcher: ['/', '/inventory/:path*'],
 // }
+//= ===========
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const userAuthenticate = true
+  const userAuthenticate = false // Simulação de autenticação
 
-  const pathNameSign = new URL('/sign', request.url)
-  const pathNameDashboard = new URL('/inventory/dashboard', request.url)
+  const rootPath = '/'
+  const dashboardPath = '/inventory/dashboard'
 
-  const isRootPath = request.nextUrl.pathname === '/'
+  const currentPath = request.nextUrl.pathname
 
+  // Usuário não autenticado
   if (!userAuthenticate) {
-    if (isRootPath) {
-      return NextResponse.redirect(pathNameSign)
+    if (currentPath !== rootPath) {
+      // Redireciona para a página inicial se o usuário não estiver autenticado
+      return NextResponse.redirect(new URL(rootPath, request.url))
     }
-    return NextResponse.redirect(pathNameSign)
   }
 
-  if (isRootPath) {
-    return NextResponse.redirect(pathNameDashboard)
+  // Usuário autenticado e no caminho raiz
+  if (userAuthenticate && currentPath === rootPath) {
+    // Redireciona para o dashboard
+    return NextResponse.redirect(new URL(dashboardPath, request.url))
   }
 
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/', '/inventory/:path*'],
+  matcher: ['/', '/inventory/:path*'], // Define os caminhos onde o middleware será aplicado
 }
+
+// import { NextResponse } from 'next/server'
+// import type { NextRequest } from 'next/server'
+
+// export function middleware(request: NextRequest) {
+//   const userAuthenticate = true
+
+//   const pathNameSign = new URL('/sign', request.url)
+//   const pathNameDashboard = new URL('/inventory/dashboard', request.url)
+
+//   const isRootPath = request.nextUrl.pathname === '/'
+
+//   if (!userAuthenticate) {
+//     if (isRootPath) {
+//       return NextResponse.redirect(pathNameSign)
+//     }
+//     return NextResponse.redirect(pathNameSign)
+//   }
+
+//   if (isRootPath) {
+//     return NextResponse.redirect(pathNameDashboard)
+//   }
+
+//   return NextResponse.next()
+// }
+
+// export const config = {
+//   matcher: ['/', '/inventory/:path*'],
+// }
