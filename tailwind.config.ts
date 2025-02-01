@@ -21,6 +21,9 @@ const config: Config = {
         'blue-link': '#B9D2E8',
         danger: '#E03137',
         background: 'hsl(var(--background))',
+        backgroundImage: {
+          'custom-gradient': 'linear-gradient(90deg, #e2e2e2, #c9d6ff)',
+        },
         foreground: 'hsl(var(--foreground))',
         card: {
           DEFAULT: 'hsl(var(--card))',
@@ -75,6 +78,15 @@ const config: Config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      transitionDelay: {
+        '600': '600ms',
+        '1200': '1200ms',
+        '1800': '1800ms',
+      },
+      transitionDuration: {
+        '600': '600ms',
+        '1800': '1800ms',
       },
     },
   },

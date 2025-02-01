@@ -30,7 +30,7 @@ export const Header = () => {
   return (
     <header className="flex justify-between items-center w-full gap-2">
       <Input
-        className="h-8 text-sm"
+        className="h-8 placeholder:text-gray-light"
         placeholder="Buscar Produto"
         icon={<Search width={18} color={colors['gray-dark']} />}
         handleClickIcon={() => console.log('search')}

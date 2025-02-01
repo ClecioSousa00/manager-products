@@ -3,5 +3,9 @@ type Props = {
 }
 
 export const ErrorMessage = ({ errorMessage }: Props) => {
-  return <p className="text-destructive font-medium text-sm">{errorMessage}</p>
+  return (
+    <p className="text-destructive font-medium text-left text-sm">
+      {errorMessage}
+    </p>
+  )
 }
