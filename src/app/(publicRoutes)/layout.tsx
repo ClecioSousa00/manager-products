@@ -1,7 +1,3 @@
-import Image from 'next/image'
-
-import { Logo } from '@/iconsSvg/Logo'
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className=" min-h-screen w-screen flex justify-center items-center">
