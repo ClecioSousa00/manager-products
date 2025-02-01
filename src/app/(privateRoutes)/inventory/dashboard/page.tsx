@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ContainerTable } from '../../components/Table/ContainerTable'
 import { TableContent } from '../../components/Table/TableContent'
 import { Separator } from '@/components/ui/separator'
+import { itemsProductsTable } from '../../components/Table/TableContent/productsTable'
 
 export default function Page() {
   return (
@@ -18,7 +19,7 @@ export default function Page() {
             </Link>
           </div>
           <Separator className="my-4" />
-          <TableContent />
+          <TableContent itemsProductsTable={itemsProductsTable.slice(0, 5)} />
         </ContainerTable>
         <ContainerTable>
           <div className="flex items-center justify-between">
@@ -31,9 +32,10 @@ export default function Page() {
             </Link>
           </div>
           <Separator className="my-4" />
-          <TableContent />
+          <TableContent itemsProductsTable={itemsProductsTable.slice(0, 5)} />
         </ContainerTable>
       </div>
+      {/* <DatePicker /> */}
     </section>
   )
 }
