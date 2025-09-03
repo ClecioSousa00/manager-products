@@ -6,12 +6,12 @@ type Props = {
   title: string
   subtitle: string
   buttonName: string
-  handleLogin: () => void
+  handleSwitchLogin: () => void
 } & HTMLAttributes<HTMLDivElement>
 
 export const InfosLogin = ({
   className,
-  handleLogin,
+  handleSwitchLogin,
   title,
   subtitle,
   buttonName,
@@ -29,7 +29,7 @@ export const InfosLogin = ({
       <p className="text-sm mt-1 mb-4">{subtitle}</p>
       <Button
         className="w-40 h-11 bg-transparent border-2 border-white shadow-none rounded-lg"
-        onClick={handleLogin}
+        onClick={handleSwitchLogin}
       >
         {buttonName}
       </Button>

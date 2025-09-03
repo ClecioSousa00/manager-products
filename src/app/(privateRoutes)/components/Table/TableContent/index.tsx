@@ -26,8 +26,8 @@ import { ChevronsUpDown } from 'lucide-react'
 
 import { IconEdit } from '@/iconsSvg/IconEdit'
 import { IconDelete } from '@/iconsSvg/IconDelete'
-import { useToast } from '@/hooks/use-toast'
 import { FormAddProduct } from '../../FormAddProduct'
+import { toast } from 'sonner'
 
 type Props = {
   hasEditTable?: boolean
@@ -38,7 +38,6 @@ export const TableContent = ({
   hasEditTable = false,
   itemsProductsTable,
 }: Props) => {
-  const { toast } = useToast()
   // const [quantityProductsPerPage, setQuantityProductsPerPage] = useState(10)
 
   const handleSelectShowProducts = (quantityShowProducts: string) => {
@@ -52,15 +51,12 @@ export const TableContent = ({
 
   const showToast = (success: boolean) => {
     if (success) {
-      toast({
-        description: 'Produto Deletado com Sucesso.',
-      })
+      toast('Produto Deletado com Sucesso.')
       return
     }
-    toast({
-      variant: 'destructive',
-      title: 'Algo deu Errado.',
+    toast.error('Algo deu Errado.',{
       description: 'Tente Novamente Mais Tarde.',
+      
     })
   }
 

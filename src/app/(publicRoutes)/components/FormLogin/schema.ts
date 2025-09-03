@@ -11,7 +11,7 @@ export type LoginFormSchemaProps = z.infer<typeof LoginFormSchema>
 
 export const RegisterFormSchema = z
   .object({
-    userName: z
+    username: z
       .string()
       .min(3, { message: 'O userName deve ter no mínimo 3 caracteres' }),
     email: z.string().email({ message: 'Informe um Email válido.' }),

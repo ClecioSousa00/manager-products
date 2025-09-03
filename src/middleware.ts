@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const userAuthenticate = true // Simulação de autenticação
+  const userAuthenticate = false // Simulação de autenticação
 
   const rootPath = '/'
   const dashboardPath = '/inventory/dashboard'

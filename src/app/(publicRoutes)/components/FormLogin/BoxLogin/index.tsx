@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
 export const BoxLogin = () => {
   const [isActive, setIsActive] = useState(false)
 
-  const handleLogin = async () => {
+  const handleSwitchLogin = async () => {
     setIsActive(!isActive)
   }
   return (
@@ -19,8 +19,8 @@ export const BoxLogin = () => {
         isActive ? 'before:left-1/2' : '',
       )}
     >
-      <Login isActive={isActive} />
-      <Register isActive={isActive} />
+      <Login isActive={isActive}/>
+      <Register isActive={isActive}  handleSwitchLogin={handleSwitchLogin}/>
 
       <InfosLogin
         className={cn(
@@ -30,7 +30,7 @@ export const BoxLogin = () => {
         title="Bem Vindo de Volta!"
         subtitle="Não possui uma conta?"
         buttonName="Criar Conta"
-        handleLogin={handleLogin}
+        handleSwitchLogin={handleSwitchLogin}
       />
 
       <InfosLogin
@@ -41,7 +41,7 @@ export const BoxLogin = () => {
         title="Olá, Bem Vindo!"
         subtitle="Já possui uma conta?"
         buttonName="Entrar"
-        handleLogin={handleLogin}
+        handleSwitchLogin={handleSwitchLogin}
       />
     </div>
   )
