@@ -1,83 +1,41 @@
-import { useState } from 'react'
+import { Eye, EyeOff, Mail, User } from "lucide-react";
 
-import { Eye, EyeOff, Mail, User } from 'lucide-react'
+import Link from "next/link";
 
-import Link from 'next/link'
-
-import { Input } from '@/components/ui/input'
-
-import { ContainerForm } from '../ContainerForm'
-
-import { colors } from '@/styles/colors'
-import { useForm } from 'react-hook-form'
-import { RegisterFormSchema, RegisterFormSchemaProps } from '../schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ErrorMessage } from '../../ErrorMessage'
-import { UserService } from '@/services/user'
-import { toast } from 'sonner'
+import { Input } from "@/components/ui/input";
+import { colors } from "@/styles/colors";
+import { ErrorMessage } from "../../ErrorMessage";
+import { ContainerForm } from "../ContainerForm";
+import { UseRegister } from "./userRegister";
 
 type Props = {
-  isActive: boolean
-  handleSwitchLogin: () =>void
-}
-export const Register = ({ isActive,handleSwitchLogin }: Props) => {
-  const [isShowPassword, setIsShowPassword] = useState(false)
+  isActive: boolean;
+  handleSwitchLogin: () => void;
+};
+export const Register = ({ isActive, handleSwitchLogin }: Props) => {
   const {
-    register,
+    errors,
+    handleForm,
+    handleShowPassword,
     handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm<RegisterFormSchemaProps>({
-    resolver: zodResolver(RegisterFormSchema),
-  })
-
- // componente
-const handleForm = async (dataForm: RegisterFormSchemaProps) => {
-  const { email, password, username } = dataForm
-  try {
-    await UserService.createUser({ email, password, username })
-    showToast(true)
-    reset()
-     handleSwitchLogin()
-  } catch (err: any) {
-    showToast(false, err?.message)
-  }
-}
-
-  const showToast = (success: boolean, message?: string) => {
-    if (success) {
-      toast('Conta criada com sucesso.',{ 
-        position:'top-left'
-        }
-      )
-      return
-    }
-    
-    toast.error('Algo deu Errado.',{
-      description: message ?? 'Tente Novamente Mais Tarde.',
-      position:'top-left'
-    })
-  }
-
-  const handleShowPassword = () => {
-    setIsShowPassword(!isShowPassword)
-  }
-
+    register,
+    isShowPassword,
+  } = UseRegister({ handleSwitchLogin });
 
   return (
     <ContainerForm
+      className={
+        isActive ? "visible right-1/2 opacity-100" : "invisible opacity-0"
+      }
       onSubmit={handleSubmit(handleForm)}
       textLogin="Criar Conta"
-      className={
-        isActive ? 'opacity-100 visible right-1/2' : 'opacity-0 invisible'
-      }
     >
       <div>
         <Input
-          {...register('username')}
-          placeholder="username"
-          icon={<User size={20} color={colors['gray-light']} />}
+          {...register("username")}
           className="placeholder:text-gray-light"
+          icon={<User color={colors["gray-light"]} size={20} />}
+          placeholder="username"
         />
         {errors.username?.message && (
           <ErrorMessage errorMessage={errors.username.message} />
@@ -85,10 +43,10 @@ const handleForm = async (dataForm: RegisterFormSchemaProps) => {
       </div>
       <div>
         <Input
-          {...register('email')}
-          placeholder="Email"
-          icon={<Mail size={20} color={colors['gray-light']} />}
+          {...register("email")}
           className="placeholder:text-gray-light"
+          icon={<Mail color={colors["gray-light"]} size={20} />}
+          placeholder="Email"
         />
         {errors.email?.message && (
           <ErrorMessage errorMessage={errors.email.message} />
@@ -96,48 +54,48 @@ const handleForm = async (dataForm: RegisterFormSchemaProps) => {
       </div>
       <div>
         <Input
-          {...register('password')}
-          placeholder="Senha"
-          type={`${isShowPassword ? 'text' : 'password'}`}
+          {...register("password")}
           className="placeholder:text-gray-light"
+          handleClickIcon={handleShowPassword}
           icon={
             isShowPassword ? (
-              <EyeOff size={20} color={colors['gray-light']} />
+              <EyeOff color={colors["gray-light"]} size={20} />
             ) : (
-              <Eye size={20} color={colors['gray-light']} />
+              <Eye color={colors["gray-light"]} size={20} />
             )
           }
-          handleClickIcon={handleShowPassword}
-        />{' '}
+          placeholder="Senha"
+          type={`${isShowPassword ? "text" : "password"}`}
+        />{" "}
         {errors.password?.message && (
           <ErrorMessage errorMessage={errors.password.message} />
         )}
       </div>
       <div>
         <Input
-          {...register('confirmPassword')}
-          placeholder="Confirmar senha"
-          type={`${isShowPassword ? 'text' : 'password'}`}
+          {...register("confirmPassword")}
           className="placeholder:text-gray-light"
+          handleClickIcon={handleShowPassword}
           icon={
             isShowPassword ? (
-              <EyeOff size={20} color={colors['gray-light']} />
+              <EyeOff color={colors["gray-light"]} size={20} />
             ) : (
-              <Eye size={20} color={colors['gray-light']} />
+              <Eye color={colors["gray-light"]} size={20} />
             )
           }
-          handleClickIcon={handleShowPassword}
+          placeholder="Confirmar senha"
+          type={`${isShowPassword ? "text" : "password"}`}
         />
         {errors.confirmPassword?.message && (
           <ErrorMessage errorMessage={errors.confirmPassword.message} />
         )}
       </div>
       <Link
+        className="my-3 block font-bold text-blue-dark text-sm capitalize"
         href="/inventory/dashboard"
-        className="text-blue-dark text-sm my-3 block capitalize font-bold"
       >
         Esqueceu sua senha?
       </Link>
     </ContainerForm>
-  )
-}
+  );
+};

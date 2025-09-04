@@ -1,52 +1,49 @@
-import { useState } from 'react'
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Eye, EyeOff, Mail } from 'lucide-react'
+import { Eye, EyeOff, Mail } from "lucide-react";
 
-import Link from 'next/link'
-
-import { Input } from '@/components/ui/input'
-
-import { ContainerForm } from '../ContainerForm'
-
-import { colors } from '@/styles/colors'
-import { useForm } from 'react-hook-form'
-import { LoginFormSchema, LoginFormSchemaProps } from '../schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ErrorMessage } from '../../ErrorMessage'
+import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Input } from "@/components/ui/input";
+import { colors } from "@/styles/colors";
+import { ErrorMessage } from "../../ErrorMessage";
+import { ContainerForm } from "../ContainerForm";
+import { LoginFormSchema, type LoginFormSchemaProps } from "./schema";
 
 type Props = {
-  isActive: boolean
-}
+  isActive: boolean;
+};
 
 export const Login = ({ isActive }: Props) => {
-  const [isShowPassword, setIsShowPassword] = useState(false)
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormSchemaProps>({
     resolver: zodResolver(LoginFormSchema),
-  })
+  });
 
   const handleForm = (dataForm: LoginFormSchemaProps) => {
-    console.log(dataForm)
-  }
+    console.log(dataForm);
+  };
 
   const handleShowPassword = () => {
-    setIsShowPassword(!isShowPassword)
-  }
+    setIsShowPassword(!isShowPassword);
+  };
   return (
     <ContainerForm
+      className={isActive ? "right-1/2" : ""}
       onSubmit={handleSubmit(handleForm)}
       textLogin="Entrar"
-      className={isActive ? 'right-1/2' : ''}
     >
       <div>
         <Input
-          {...register('email')}
-          placeholder="Email"
+          {...register("email")}
           className="placeholder:text-gray-light"
-          icon={<Mail size={20} color={colors['gray-light']} />}
+          icon={<Mail color={colors["gray-light"]} size={20} />}
+          placeholder="Email"
         />
         {errors.email?.message && (
           <ErrorMessage errorMessage={errors.email.message} />
@@ -54,18 +51,18 @@ export const Login = ({ isActive }: Props) => {
       </div>
       <div>
         <Input
-          {...register('password')}
-          placeholder="Senha"
+          {...register("password")}
           className="placeholder:text-gray-light"
-          type={`${isShowPassword ? 'text' : 'password'}`}
+          handleClickIcon={handleShowPassword}
           icon={
             isShowPassword ? (
-              <EyeOff size={20} color={colors['gray-light']} />
+              <EyeOff color={colors["gray-light"]} size={20} />
             ) : (
-              <Eye size={20} color={colors['gray-light']} />
+              <Eye color={colors["gray-light"]} size={20} />
             )
           }
-          handleClickIcon={handleShowPassword}
+          placeholder="Senha"
+          type={`${isShowPassword ? "text" : "password"}`}
         />
         {errors.password?.message && (
           <ErrorMessage errorMessage={errors.password.message} />
@@ -73,11 +70,11 @@ export const Login = ({ isActive }: Props) => {
       </div>
 
       <Link
+        className="my-3 block font-bold text-blue-dark text-sm capitalize"
         href="/inventory/dashboard"
-        className="text-blue-dark text-sm my-3 block capitalize font-bold"
       >
         Esqueceu sua senha?
       </Link>
     </ContainerForm>
-  )
-}
+  );
+};
