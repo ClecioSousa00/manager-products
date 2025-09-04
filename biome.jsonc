@@ -8,6 +8,12 @@
       },
       "suspicious": {
         "noConsole": "off"
+      },
+      "performance": {
+        "noNamespaceImport": "off"
+      },
+      "a11y": {
+        "useButtonType": "off"
       }
     }
   }

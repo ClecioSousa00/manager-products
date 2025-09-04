@@ -20,6 +20,7 @@ export const Register = ({ isActive, handleSwitchLogin }: Props) => {
     handleSubmit,
     register,
     isShowPassword,
+    isLoading,
   } = UseRegister({ handleSwitchLogin });
 
   return (
@@ -27,6 +28,7 @@ export const Register = ({ isActive, handleSwitchLogin }: Props) => {
       className={
         isActive ? "visible right-1/2 opacity-100" : "invisible opacity-0"
       }
+      isLoading={isLoading}
       onSubmit={handleSubmit(handleForm)}
       textLogin="Criar Conta"
     >

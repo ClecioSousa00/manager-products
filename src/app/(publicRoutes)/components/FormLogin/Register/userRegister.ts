@@ -1,65 +1,69 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { UserService } from "@/services/user";
+import { getErrorMessage } from "@/utils/get-error-message";
 import { RegisterFormSchema, type RegisterFormSchemaProps } from "./schema";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { UserService } from "@/services/user";
-import { toast } from "sonner";
-import { getErrorMessage } from "@/services/utils/get-error-message";
-
 type Props = {
-	handleSwitchLogin: () => void;
+  handleSwitchLogin: () => void;
 };
 
 export const UseRegister = ({ handleSwitchLogin }: Props) => {
-	const [isShowPassword, setIsShowPassword] = useState(false);
-	const {
-		register,
-		handleSubmit,
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-		formState: { errors },
-		reset,
-	} = useForm<RegisterFormSchemaProps>({
-		resolver: zodResolver(RegisterFormSchema),
-	});
+  const {
+    register,
+    handleSubmit,
 
-	const handleForm = async (dataForm: RegisterFormSchemaProps) => {
-		const { email, password, username } = dataForm;
-		try {
-			await UserService.createUser({ email, password, username });
-			showToast(true);
-			reset();
-			handleSwitchLogin();
-		} catch (err: unknown) {
-			showToast(false, getErrorMessage(err));
-		}
-	};
+    formState: { errors },
+    reset,
+  } = useForm<RegisterFormSchemaProps>({
+    resolver: zodResolver(RegisterFormSchema),
+  });
 
-	const showToast = (success: boolean, message?: string) => {
-		if (success) {
-			toast("Conta criada com sucesso.", {
-				position: "top-left",
-			});
-			return;
-		}
+  const handleForm = async (dataForm: RegisterFormSchemaProps) => {
+    setIsLoading((prevState) => !prevState);
+    const { email, password, username } = dataForm;
+    try {
+      await UserService.createUser({ email, password, username });
+      showToast(true);
+      reset();
+      handleSwitchLogin();
+    } catch (error: unknown) {
+      showToast(false, getErrorMessage(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-		toast.error("Algo deu Errado.", {
-			description: message ?? "Tente Novamente Mais Tarde.",
-			position: "top-left",
-		});
-	};
+  const showToast = (success: boolean, message?: string) => {
+    if (success) {
+      toast("Conta criada com sucesso.", {
+        position: "top-left",
+      });
+      return;
+    }
 
-	const handleShowPassword = () => {
-		setIsShowPassword(!isShowPassword);
-	};
+    toast.error("Algo deu Errado.", {
+      description: message ?? "Tente Novamente Mais Tarde.",
+      position: "top-left",
+    });
+  };
 
-	return {
-		register,
-		handleSubmit,
-		errors,
-		handleForm,
-		handleShowPassword,
-		isShowPassword,
-	};
+  const handleShowPassword = () => {
+    setIsShowPassword(!isShowPassword);
+  };
+
+  return {
+    register,
+    handleSubmit,
+    errors,
+    handleForm,
+    handleShowPassword,
+    isShowPassword,
+    isLoading,
+  };
 };

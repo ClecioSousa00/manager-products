@@ -1,5 +1,5 @@
-import * as create from './create-user'
+import * as create from "./create-user";
 
-export const UserService ={
-  ...create
-}
+export const UserService = {
+  ...create,
+};

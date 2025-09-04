@@ -1,40 +1,30 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import { Eye, EyeOff, Mail } from "lucide-react";
-
 import Link from "next/link";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { colors } from "@/styles/colors";
 import { ErrorMessage } from "../../ErrorMessage";
 import { ContainerForm } from "../ContainerForm";
-import { LoginFormSchema, type LoginFormSchemaProps } from "./schema";
+import { UseLogin } from "./userLogin";
 
 type Props = {
   isActive: boolean;
 };
 
 export const Login = ({ isActive }: Props) => {
-  const [isShowPassword, setIsShowPassword] = useState(false);
   const {
-    register,
+    errors,
+    handleForm,
+    handleShowPassword,
     handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormSchemaProps>({
-    resolver: zodResolver(LoginFormSchema),
-  });
+    isLoading,
+    register,
+    isShowPassword,
+  } = UseLogin();
 
-  const handleForm = (dataForm: LoginFormSchemaProps) => {
-    console.log(dataForm);
-  };
-
-  const handleShowPassword = () => {
-    setIsShowPassword(!isShowPassword);
-  };
   return (
     <ContainerForm
       className={isActive ? "right-1/2" : ""}
+      isLoading={isLoading}
       onSubmit={handleSubmit(handleForm)}
       textLogin="Entrar"
     >

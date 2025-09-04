@@ -1,71 +1,79 @@
-'use client'
-import { Logo } from '@/iconsSvg/Logo'
-import { LogOut, Menu, X } from 'lucide-react'
-import { LinkNavBarMenu } from '../LinkNavBarMenu'
-import { usePathname } from 'next/navigation'
-import { links } from '../../links/links'
-import { colors } from '@/styles/colors'
-import { useState } from 'react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+"use client";
+import { LogOut, Menu, X } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Logo } from "@/iconsSvg/Logo";
+import { cn } from "@/lib/utils";
+import { AuthUsrService } from "@/services/auth";
+import { colors } from "@/styles/colors";
+import { links } from "../../links/links";
+import { LinkNavBarMenu } from "../LinkNavBarMenu";
 
 export const NavBarMenu = () => {
-  const pathname = usePathname()
-  const [isShowMenu, setIsShowMenu] = useState(false)
-  console.log(pathname)
+  const pathname = usePathname();
+  const [isShowMenu, setIsShowMenu] = useState(false);
+  const router = useRouter();
 
   const handleShowMenu = () => {
-    setIsShowMenu(!isShowMenu)
-  }
+    setIsShowMenu(!isShowMenu);
+  };
+
+  const handleLogout = async () => {
+    await AuthUsrService.logoutUser();
+    router.push("/");
+  };
 
   return (
     <>
-      <button onClick={handleShowMenu} className="pt-2  md:hidden">
-        <Menu color={colors['gray-dark']} />
+      <button className="pt-2 md:hidden" onClick={handleShowMenu}>
+        <Menu color={colors["gray-dark"]} />
       </button>
 
       <div
         className={cn(
-          'bg-blue-primary z-10 -left-44 pt-4 px-4 w-0 top-0 bottom-0 overflow-hidden absolute transition-all  rounded-r-lg md:rounded-lg md:static   md:w-64 md:h-full',
-          isShowMenu ? 'w-2/3 left-0 ' : '',
+          "-left-44 absolute top-0 bottom-0 z-10 flex w-0 flex-col justify-between overflow-hidden rounded-r-lg bg-blue-primary px-4 pt-4 transition-all md:static md:h-full md:w-64 md:rounded-lg",
+          isShowMenu ? "left-0 w-2/3" : ""
         )}
       >
-        <div className="flex justify-end md:hidden">
-          <button onClick={handleShowMenu}>
-            <X color={colors['gray-dark']} />
-          </button>
-        </div>
         <div>
-          <div className="flex items-center gap-2">
-            <Logo width={24} />
-            <h1 className=" font-extrabold capitalize">inventory</h1>
+          <div className="flex justify-end md:hidden">
+            <button onClick={handleShowMenu}>
+              <X color={colors["gray-dark"]} />
+            </button>
           </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <Logo width={24} />
+              <h1 className="font-extrabold capitalize">inventory</h1>
+            </div>
+          </div>
+          <nav className="space-y-2">
+            {links.map((link) => {
+              const LinkIcon = link.icon;
+              return (
+                <ul key={link.href}>
+                  <li>
+                    <LinkNavBarMenu
+                      active={pathname === link.href}
+                      href={link.href}
+                    >
+                      <LinkIcon width={18} />
+                      <span className="text-sm">{link.name}</span>
+                    </LinkNavBarMenu>
+                  </li>
+                </ul>
+              );
+            })}
+          </nav>
         </div>
-        <nav className="space-y-2">
-          {links.map((link) => {
-            const LinkIcon = link.icon
-            return (
-              <ul key={link.href}>
-                <li>
-                  <LinkNavBarMenu
-                    href={link.href}
-                    active={pathname === link.href}
-                  >
-                    <LinkIcon width={18} />
-                    <span className="text-sm">{link.name}</span>
-                  </LinkNavBarMenu>
-                </li>
-              </ul>
-            )
-          })}
-        </nav>
-        <div className="hidden md:h-4/6 md:flex  md:items-end  md:w-full">
-          <Button className="w-full">
+        <div className="pb-3 md:w-full">
+          <Button className="w-full" onClick={handleLogout}>
             Sair
             <LogOut />
           </Button>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
